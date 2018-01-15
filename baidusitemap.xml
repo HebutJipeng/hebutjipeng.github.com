@@ -3,12 +3,87 @@
 
     
   <url>
-    <loc>https://hebutjipeng.github.io/2018/01/15/about/</loc>
-    <lastmod>2018-01-15T02:10:02.298Z</lastmod>
+    <loc>https://hebutjipeng.github.io/2018/01/15/requirejs-%E5%92%8C-commonjs/</loc>
+    <lastmod>2018-01-15T07:39:39.461Z</lastmod>
     <data>
         <display>
-        <title>about</title>
-        <pubTime>2018-01-15T02:10:02.000Z</pubTime>
+        <title>requirejs-和-commonjs</title>
+        <pubTime>2018-01-15T06:26:53.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hebutjipeng.github.io/2018/01/15/nexus-%E4%B8%8A%E6%90%AD%E5%BB%BAnpm%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2018-01-15T07:38:05.753Z</lastmod>
+    <data>
+        <display>
+        <title>nexus-上搭建npm本地服务器</title>
+        <pubTime>2018-01-15T06:26:53.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hebutjipeng.github.io/2018/01/15/mac-%E5%8D%87%E7%BA%A7%E5%90%8E-%E5%87%BA%E7%8E%B0xcrun--error--invalid-active-developer-path-(-Library-Develo/</loc>
+    <lastmod>2018-01-15T07:37:34.195Z</lastmod>
+    <data>
+        <display>
+        <title>mac-升级后-出现xcrun--error--invalid-active-developer-path-(-Library-Develo</title>
+        <pubTime>2018-01-15T06:26:53.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hebutjipeng.github.io/2018/01/15/js%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2018-01-15T07:34:41.145Z</lastmod>
+    <data>
+        <display>
+        <title>js函数式编程</title>
+        <pubTime>2018-01-15T06:26:53.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hebutjipeng.github.io/2018/01/15/%E8%8A%82%E6%B5%81%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E5%8E%BB%E6%8A%96/</loc>
+    <lastmod>2018-01-15T07:24:01.639Z</lastmod>
+    <data>
+        <display>
+        <title>节流函数和函数去抖</title>
+        <pubTime>2018-01-15T06:26:53.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://hebutjipeng.github.io/2018/01/15/%E5%BC%95%E7%94%A8%E8%B5%8B%E5%80%BC/</loc>
+    <lastmod>2018-01-15T07:22:46.360Z</lastmod>
+    <data>
+        <display>
+        <title>引用赋值</title>
+        <pubTime>2018-01-15T06:26:53.000Z</pubTime>
         
          
            

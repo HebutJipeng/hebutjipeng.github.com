@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="pengji"><meta name="description" content="一切奇淫巧技都是纸老虎"><link rel="alternative" href="/atom.xml" title="pengji的忘记列表" type="application/atom+xml"><link rel="icon" href="/favicon.png"><title>nexus-上搭建npm本地服务器 - pengji的忘记列表</title><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/js/fancybox/jquery.fancybox.min.css"><!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--><script src="/js/jquery-3.1.1.min.js"></script><script src="/js/fancybox/jquery.fancybox.min.js"></script></head><body style="opacity:0;"><header class="head"><h1 class="head-title u-fl"><a href="/">pengji的忘记列表</a></h1><nav class="head-nav u-fr"><ul class="head-nav__list"><li class="head-nav__item"><a class="head-nav__link" href="/archives">目录</a></li></ul></nav></header><main class="main"><article class="post"><header class="post__head"> <time class="post__time" datetime="2018-01-15T06:26:53.000Z">January 15, 2018</time><h1 class="post__title"><a href="/2018/01/15/nexus-上搭建npm本地服务器/">nexus-上搭建npm本地服务器</a></h1><div class="post__main echo"><p>nexus 纯小白文，如有雷同，大概率我参考了你的文档。</p>
+<h2 id="1-在本地运行nexus"><a href="#1-在本地运行nexus" class="headerlink" title="1.在本地运行nexus"></a>1.在本地运行nexus</h2><p> 附上下载链接：<a href="https://www.sonatype.com/download-oss-sonatype?hsCtaTracking=10655413-f621-4c62-be46-df84cf6b6b90%7C79f798b3-f0df-4370-b569-0eda6e14390e" target="_blank" rel="noopener">Nexus Repository OSS 下载链接</a><br>附上文档链接：<a href="https://help.sonatype.com/display/HSC/Node+Packaged+Modules+and+npm+Registries+-+NXRM+3" target="_blank" rel="noopener">Nexus Repository OSS 文档链接</a></p>
+<blockquote>
+<p>有几个值得注意的是</p>
+</blockquote>
+<ul>
+<li><p>我的 系统为 64位 win 7，平时只配置了java的基本环境，没有配置编译环境。很尴尬，配置javac耽误了我一点时间。需要的同学，在运行之前 需要配置一下jre环境。</p>
+</li>
+<li><p>我下载的是 nexus-3.5.0-02 这个版本。事实证明在win下虽然看起来一副人畜无害的样子，似乎可以直接点击安装，但是事实上，啧啧啧。</p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-7d1345539585ca9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>这里没有好好阅读文档，也消耗了我的一些时间，下面放出win 下正确启动方法<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 在 \nexus-3.5.0-02\bin 目录下执行</span><br><span class="line">$ nexus.exe /run</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>这里经测试 用win自带的cmd，和budun都可以比较好的启动，用git bash则启动不是很好<br><img src="http://upload-images.jianshu.io/upload_images/3112405-f69905866766485d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></li>
+</ul>
+<p>启动之后默认地址为 localhost:8081, 默认账号密码  admin/ admin123</p>
+<h2 id="Nexus-Repository-Manager-中添加-npm"><a href="#Nexus-Repository-Manager-中添加-npm" class="headerlink" title="Nexus Repository Manager 中添加 npm"></a>Nexus Repository Manager 中添加 npm</h2><p>如果点击：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-6ed2f417bae14036.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<p>这里有三个类型的npm选项：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-76bb9056ac0b4799.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<p>文档中对这三个类型的仓库有详细的解释：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-5b66f23647b467bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<hr>
+<p>附上某歌翻译：</p>
+<h3 id="Proxying-npm-Registries"><a href="#Proxying-npm-Registries" class="headerlink" title="Proxying npm Registries"></a>Proxying npm Registries</h3><p>为了减少开发人员和CI服务器的重复下载量并提高下载速度，您应该对托管在<a href="https://registry.npmjs.org上的注册表进行代理。" target="_blank" rel="noopener">https://registry.npmjs.org上的注册表进行代理。</a> 默认情况下，npm直接访问此注册表。 您还可以代理您需要的任何其他注册表。<br>要代理外部npm注册表，您只需创建一个新的npm（代理），如“存储库管理”中所述。<br>最小配置步骤是：</p>
+<ul>
+<li>定义名称</li>
+<li>定义远程存储的URL，例如<a href="https://registry.npmjs.org" target="_blank" rel="noopener">https://registry.npmjs.org</a></li>
+<li>选择存储的Blob存储</li>
+</ul>
+<h3 id="Private-npm-Registries"><a href="#Private-npm-Registries" class="headerlink" title="Private npm Registries"></a>Private npm Registries</h3><p>私人npm注册表可用于上传您自己的软件包以及第三方软件包。 您可以通过在存储库管理器中设置npm格式的托管存储库来创建私有的npm注册表。 为了这些目的，建立两个独立的托管存储库是一个很好的做法。<br>要创建具有npm格式的托管存储库，只需创建一个新的npm（托管），如“存储库管理”中所述。<br>最小配置步骤是：</p>
+<ul>
+<li>定义名称</li>
+<li>选择存储的Blob存储</li>
+</ul>
+<p>随着软件包从存储库部署或删除，npm注册表信息将立即更新。</p>
+<h3 id="Grouping-npm-Registries"><a href="#Grouping-npm-Registries" class="headerlink" title="Grouping npm Registries"></a>Grouping npm Registries</h3><p>存储库组是将所有npm注册表存储库从存储库管理器公开给您的用户的推荐方式，而不需要任何其他客户端配置。存储库组允许您将多个代理和托管存储库的聚合内容公开为一个URL到npm和其他工具。这可以通过创建一个新的npm（组），如“存储库管理”中所述，用于npm存储库。<br>最小配置步骤是：</p>
+<ul>
+<li>定义名称</li>
+<li>选择存储的Blob存储</li>
+<li>以所需的顺序将npm存储库添加到成员列表中</li>
+</ul>
+<p>典型的有用的示例是将代理存储库分组：代理npm注册表，npm托管存储库与内部软件包和另一个npm托管存储库与第三方软件包。<br>使用存储库组的URL作为客户端工具中的npm存储库URL，您可以使用一个URL访问所有三个存储库中的软件包。添加的任何新软件包以及添加到组中的任何新存储库将自动可用。</p>
+<hr>
+<ol>
+<li>创建 Proxying npm Registries 代理仓库</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-37ebbc0d64c830a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<ol>
+<li>创建 Hosted npm Registries 代理仓库</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-66c19792d1a1af8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<ol>
+<li>创建  Grouping npm Registries 仓库<br>需要注意的是组仓库要把之前的 proxy 和 hosted 都添加上。</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-4a3b73e82ef008b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<blockquote>
+<p>我的目录对应为  mytest/myhost/mygroup</p>
+</blockquote>
+<p>在home目录下， 的.npmrc文件中添加 registry = <a href="http://localhost:8081/repository/npm-all/" target="_blank" rel="noopener">http://localhost:8081/repository/npm-all/</a> 。这个路径要和自己的路径一致，并且最后的rep名要和group相同。</p>
+<p>win下 home路径：<br><img src="http://upload-images.jianshu.io/upload_images/3112405-3d22c1473c8540f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<p>这时尝试一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 查看一下 是否从本地服务器中下载</span><br><span class="line">$ npm -loglevel info install grunt</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-24fa52ac1a45328a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片我抄的，我自己的没截图"></p>
+<p>此时可以验证一下 是否依赖走了代理：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-f8a82f22a035ae41.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="设置权限"><a href="#设置权限" class="headerlink" title="设置权限"></a>设置权限</h2><p>把这个选项拖到右边就可以了</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-d90bcf8c8fdcdb2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<p>在admin之外可以重新设置一个账号，以及权限</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-3a59e0300667d076.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 使用</span><br><span class="line">$ npm login –registry=http://localhost:8081/repository/mygroup</span><br><span class="line">// 进行登陆，需要填写账号、密码以及邮箱。</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-65b42a283b08a7cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<h2 id="发布到hosted"><a href="#发布到hosted" class="headerlink" title="发布到hosted"></a>发布到hosted</h2><blockquote>
+<p>我和原教程不一样的是：我发布到本地hosted， 而不是直接到npm社区，这里需要注意的是 通过proxy是可以直接发布到npm社区的，使用的是社区的账号密码，这个需要提前申请</p>
+<p>要发布的模块，必须保证在根目录下有package.json文件，否则会报错。</p>
+</blockquote>
+<p>pachage.json文件内容比较随意，如果比较懒 可以用  npm init 直接自动生成。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"myhost"</span>,</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"1.0.0"</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>然后执行发布命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> $ npm publish –registry http://localhost:8081/repository/myhost</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-7ff83834a03ba6c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>然后我遇到了报错，按照报错执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> $ npm adduser –registry http://localhost:8081/repository/myhost</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里值得注意的是， adduser的时候要指明是哪个rep，要不就会add到默认的.npmrc 里添加的 rep中</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-b9cd8079d4a9c1be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>添加完用户之后，再执行发布命令就ok了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-394b1c8bce17b24a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>package.json可以指定name 和version并且可以添加发布路径的配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"name"</span>: <span class="string">"intro"</span>,</span><br><span class="line">   <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">   <span class="attr">"publishConfig"</span> : &#123;</span><br><span class="line">       <span class="attr">"registry"</span> : <span class="string">"http://localhost:8081/repository/myhost/"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样的话发布直接用 npm publish就可以了。</p>
+<p>发布之后可以在 系统中的 左侧browse 中的assets中看到上传的资源</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-70f6dd148c39055d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<p>group 中可以同时看到 proxy 和 hosted 的资源， proxy会存下第一次下载过的目录，之后再下载时走的是代理，hosted存的是本地上传的包资源。</p>
+<p>然后可以在本地下载一下刚才上传到hosted的包：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3112405-23f5a0982a8abcc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="Paste_Image.png"></p>
+<p>以上，为所有内容。</p>
+<p>参考：   <a href="http://blog.csdn.net/u010130282/article/details/51892625" target="_blank" rel="noopener">npm 私服（上）</a> 、 <a href="http://blog.csdn.net/u010130282/article/details/51981203" target="_blank" rel="noopener">npm 私服（下）</a> 、 <a href="http://m.blog.csdn.net/xixiaoxie2/article/details/72492085" target="_blank" rel="noopener">nexus搭建npm私服</a><br>感谢以上朋友的文档， 内容侵删。</p>
+</div></header></article><div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC8zMzIzOS85Nzk2"><script>(function(d, s) {var j, e = d.getElementsByTagName(s)[0];if (typeof LivereTower === 'function') { return; } j = d.createElement(s);j.src = 'https://cdn-city.livere.com/js/embed.dist.js';j.async = true;e.parentNode.insertBefore(j, e);})(document, 'script');</script></div></main><footer class="foot"><div class="foot-copy">&copy; 2016-2018 pengji</div></footer><script src="/js/scroller.js"></script><script src="/js/main.js"></script></body></html>
